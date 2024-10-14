@@ -40,61 +40,83 @@ skip Otto!
 const cities = ["New York", "London", "Paris", "Berlin", "Copenhagen", "Rome"];
 
 const people = [
-	{
-		name: "Thomas",
-		male: true,
-		age: 23,
-		hobbies: ["cycling", "football", "pool"]
-	},
-	{
-		name: "Susan",
-		male: false,
-		age: 26,
-		hobbies: ["jogging", "travelling", "dancing"]
-	},
-	{
-		name: "Monica",
-		male: false,
-		age: 21,
-		hobbies: ["skateboarding", "guitar", "concerts"]
-	},
-	{
-		name: "Avery",
-		male: true,
-		age: 28,
-		hobbies: ["writing", "games", "memes"]
-	},
-	{
-		name: "Phillip",
-		male: true,
-		age: 24,
-		hobbies: ["boxing", "wrestling", "mma"]
-	},
-	{
-		name: "Otto",
-		male: true,
-		age: 36,
-		hobbies: ["movies", "cinema", "music"]
-	},
-	{
-		name: "Annabelle",
-		male: false,
-		age: 30,
-		hobbies: ["makeup", "fashion", "shopping"]
-	},
-	{
-		name: "Cathy",
-		male: false,
-		age: 18,
-		hobbies: ["design", "drawing", "css"]
-	}
+  {
+    name: "Thomas",
+    male: true,
+    age: 23,
+    hobbies: ["cycling", "football", "pool"],
+  },
+  {
+    name: "Susan",
+    male: false,
+    age: 26,
+    hobbies: ["jogging", "travelling", "dancing"],
+  },
+  {
+    name: "Monica",
+    male: false,
+    age: 21,
+    hobbies: ["skateboarding", "guitar", "concerts"],
+  },
+  {
+    name: "Avery",
+    male: true,
+    age: 28,
+    hobbies: ["writing", "games", "memes"],
+  },
+  {
+    name: "Phillip",
+    male: true,
+    age: 24,
+    hobbies: ["boxing", "wrestling", "mma"],
+  },
+  {
+    name: "Otto",
+    male: true,
+    age: 36,
+    hobbies: ["movies", "cinema", "music"],
+  },
+  {
+    name: "Annabelle",
+    male: false,
+    age: 30,
+    hobbies: ["makeup", "fashion", "shopping"],
+  },
+  {
+    name: "Cathy",
+    male: false,
+    age: 18,
+    hobbies: ["design", "drawing", "css"],
+  },
 ];
 let combinedAge = 0;
 
 //your code here
 
 let averageAge = 0;
+let counter = 0;
 
+console.log("*** 1 ***");
+
+for (let i = 0; i < people.length; i++) {
+  if (people[i].name === "Otto") {
+    continue;
+  }
+  let city = cities[Math.floor(Math.random() * cities.length)];
+  people[i].city = city;
+  people[i].title = people[i].male ? "Mr." : "Ms.";
+  people[i].age += 2;
+  people[i].hobbies.unshift("coding");
+  combinedAge += people[i].age;
+  counter++;
+}
+
+averageAge = combinedAge / counter;
+averageAge = Math.round(averageAge);
+
+console.log(people);
+console.log(`The combined age is ${combinedAge} years.`);
+console.log(`The average age is ${averageAge} years.`);
 /******************************************************************************
 2.
 
@@ -116,8 +138,21 @@ Add a second parameter to the function that decides how many faces the dice
 should have.
 diceRoller(5, 20) should return an array of 5 random numbers ranging from 1-20 
 ******************************************************************************/
+console.log("");
+console.log("*** 2 ***");
 
+const diceArray = [];
+let die = 0;
 
+const diceRoller = (dice, sides) => {
+  for (let i = 0; i < dice; i++) {
+    die = Math.ceil(Math.random() * sides);
+    diceArray.push(die);
+  }
+  return diceArray;
+};
+
+console.log(diceRoller(6, 15));
 /******************************************************************************
 3.
 
@@ -141,7 +176,24 @@ Example:
 should return:
 "this text needs to be cleaned up"
 ******************************************************************************/
+console.log("");
+console.log("*** 3 ***");
 
+let stringArray = [];
+
+const stringCleanup = (strings) => {
+  for (let string of strings) {
+    stringArray.push(string.trim().toLowerCase());
+  }
+
+  stringArray = stringArray.join(" ");
+
+  return stringArray;
+};
+
+console.log(
+  stringCleanup([" thIS", "teXt  ", " nEeds ", "to", "BE", "cleANED   ", " Up"])
+);
 
 /******************************************************************************
 4.
@@ -174,8 +226,55 @@ should be detected.
 
 I have provided some string variables to test your function with.
 ******************************************************************************/
+const greetings = [
+  "Hello, how are you today?",
+  "Diciamo ciao prima di andare!",
+  "Salut, ça va bien?",
+  "Kannst du mich hören? Hallo!",
+  "Hva er regex?",
+  "Nos saludamos con un alegre hola.",
+  "Ona pomachała i powiedziała cześć z uśmiechem.",
+  "Good afternoon gentlemen!",
+];
 
+console.log("");
+console.log("*** 4 ***");
 
+let language = "";
+
+const helloChecker = (helloString) => {
+  helloString = helloString.toLowerCase();
+  if (helloString.includes("hello")) {
+    language = "english";
+  } else if (helloString.includes("ciao")) {
+    language = "italian";
+  } else if (helloString.includes("salut")) {
+    language = "french";
+  } else if (helloString.includes("hallo")) {
+    language = "german";
+  } else if (helloString.includes("hola")) {
+    language = "spanish";
+  } else if (helloString.includes("czesc")) {
+    language = "polish";
+  } else {
+    language = "none";
+  }
+
+  if (language === "none") {
+    return "No HELLO detected.";
+  } else {
+    return `HELLO detected in ${language}.`;
+  }
+};
+
+console.log(helloChecker(greetings[0]));
+console.log(helloChecker(greetings[1]));
+console.log(helloChecker(greetings[2]));
+console.log(helloChecker(greetings[3]));
+console.log(helloChecker(greetings[4]));
+console.log(helloChecker(greetings[5]));
+console.log(helloChecker(greetings[6]));
+console.log(helloChecker(greetings[7]));
 /******************************************************************************
 5.
 
@@ -204,7 +303,24 @@ should return "maybe another approach is necessary"
 doubleSwap("what is the point of this?", "o", "t")
 should return "whao is ohe ptino tf ohis?"
 ******************************************************************************/
+console.log("");
+console.log("*** 5 ***");
 
 function doubleSwap(string, charA, charB) {
-	//your code here
+  //your code here
+
+  let stringArray = string.split("");
+  for (let i = 0; i < stringArray.length; i++) {
+    if (stringArray[i] === charA) {
+      stringArray[i] = charB;
+    } else if (stringArray[i] === charB) {
+      stringArray[i] = charA;
+    }
+    string = stringArray.join("");
+  }
+  return string;
 }
+
+console.log(doubleSwap("this is a string", "i", "s"));
+console.log(doubleSwap("m#ybe #nother #ppro#ch is necess#ry", "#", "a"));
+console.log(doubleSwap("what is the point of this?", "o", "t"));
